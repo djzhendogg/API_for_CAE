@@ -1,0 +1,24 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16
+    container_name: s_auth_postgres
+    hostname: "postgres"
+    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - "5898:5432"
+    volumes:
+      - ./db_data:/var/lib/pgsql/data
+    networks:
+      - sb
+
+
+volumes:
+  db_data:
+networks:
+  sb:
